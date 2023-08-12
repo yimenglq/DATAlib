@@ -15,6 +15,12 @@ namespace DATAlib
 		int m_length;//存储的元素数量（线性表当前长度）
 
 	public:
+		virtual bool insert(const T& e)override
+		{
+
+			return insert(m_length, e);
+		}
+
 		virtual bool insert(int i, const T& e)override//插入元素
 		{
 			bool ret = ((0 <= i) && (i <= m_length));
@@ -58,6 +64,18 @@ namespace DATAlib
 			}
 			return ret;
 		}
+		virtual T get(int i)const //获取元素
+		{
+			bool ret = ((0 <= i) && (i < m_length));
+
+			if (ret)
+			{
+				return	m_array[i];
+			}
+
+			return -1;
+
+		}
 		virtual bool get(int i, T& e)const override//获取元素
 		{
 			bool ret = ((0 <= i) && (i < m_length));
@@ -97,9 +115,28 @@ namespace DATAlib
 			return (const_cast<SeqList<T>&>(*this))[i];
 		}
 
-		virtual int capacity() const = 0;//线性表最大存储数
+		
+		
+		virtual int find(const T& e)const override
+		{
+			int ret = -1;
+			
+			for (int i = 0; i < m_length; i++)
+			{
+				if (m_array[i] == e) 
+				{
+					ret = i;
+					break;
 
+				}
+			}
+			return ret;
+		}
+		
+		virtual int capacity() const = 0;//线性表最大存储数
 	};
+
+	
 
 }
 

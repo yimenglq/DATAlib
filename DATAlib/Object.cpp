@@ -16,7 +16,7 @@ namespace DATAlib
 
 		free(p);
 	}
-	void* Object::operator new[](size_t size) throw()
+		void* Object::operator new[](size_t size) throw()
 	{
 		//cout << "Object::operator new[]:  size = " << size << endl;
 		return malloc(size);
@@ -29,6 +29,26 @@ namespace DATAlib
 		Object::~Object()
 	{
 
+	}
+	bool Object::operator==(const Object& obj)
+	{
+		bool ret = 0;
+		if (this == &obj)
+		{
+			ret = 1;
+		}
+
+		return ret;
+	}
+	bool Object::operator!=(const Object& obj)
+	{
+		bool ret = 0;
+		if (this != &obj)
+		{
+			ret = 1;
+		}
+
+		return ret;
 	}
 }
 

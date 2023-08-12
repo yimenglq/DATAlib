@@ -131,12 +131,17 @@
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicList.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="LinkList.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="SeqList.h" />
+    <ClInclude Include="SmartPointers.h" />
     <ClInclude Include="StaticArray.h" />
+    <ClInclude Include="StaticLinkList.h" />
     <ClInclude Include="StaticList.h" />
-    <ClInclude Include="Test.h" />
+    <ClCompile Include="Test.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Exception.cpp" />
