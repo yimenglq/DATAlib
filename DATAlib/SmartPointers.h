@@ -1,63 +1,49 @@
 #ifndef SmartPointers_H
 #define SmartPointers_H
 #include"Object.h"
+#include"Pointer.h"
 namespace DATAlib
 {
 	template<typename T>
-	class SmartPointers : public Object
+	class SmartPointers : public Pointer<T>
 	{
-	protected:
-		T* m_pointers;
+	/*protected:
+		T* m_pointers;*/
 
 	public:
-		SmartPointers(T* const p = NULL)
+		SmartPointers(T* const p = NULL):Pointer<T>(p)
 		{
-			m_pointers = p;
 
 		}
 		/*SmartPointers(const T& p = NULL)
 		{
 			m_pointers = &p;
 		}*/
-		SmartPointers(const	SmartPointers<T>& e)
+		SmartPointers(const	SmartPointers<T>& e)//¿½±´¹¹Ôì
 		{
-			m_pointers = e.m_pointers;
+			this->m_Pointer = e.m_Pointer;
 
-			const_cast<SmartPointers<T>&>(e).m_pointers = NULL;
+			const_cast<SmartPointers<T>&>(e).m_Pointer = NULL;
 		}
 		SmartPointers<T>& operator = (const	SmartPointers<T>& e)
 		{
 			if (this != &e)
 			{
-
-				delete m_pointers;
-
-				this->m_pointers = e.m_pointers;
-				const_cast<SmartPointers<T>&>(e).m_pointers = NULL;
+				T* pointer = e.m_Pointer;
+				this->m_Pointer = e.m_Pointer;
+				const_cast<SmartPointers<T>&>(e).m_Pointer = NULL;
+				delete pointer;
 
 			}
 
 			return *this;
 		}
 
-		T& operator*()
-		{
-			return	*(this->m_pointers);
-		}
-
-		T* operator->()
-		{
-			return	this->m_pointers;
-		}
-
-		T* Get()
-		{
-			return this->m_pointers;
-		}
+		
 
 		~SmartPointers() override
 		{
-			delete m_pointers;
+			delete this->m_Pointer;
 		}
 
 

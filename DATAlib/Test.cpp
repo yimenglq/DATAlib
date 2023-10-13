@@ -15,6 +15,8 @@
 #include"LinkList.h"
 #include"Exception.h"
 #include"StaticLinkList.h"
+#include"SharedPointer.h"
+
 
 using namespace DATAlib;
 using namespace std;
@@ -37,7 +39,7 @@ public:
 
 
 
-class A
+class A/*:public Object*/
 {
 	int a;
 public:
@@ -46,6 +48,22 @@ public:
 	{
 		cout << "A()" << endl;
 		a = 0;
+	}
+
+	void Seta(int i)
+	{
+		a = i;
+	}
+
+	int geta()
+	{
+		return a;
+	}
+
+
+	int geta()const
+	{
+		return a;
 	}
 
    virtual void clea()
@@ -102,6 +120,32 @@ public:
 	}
 };
 
+class C
+{
+	C();
+public:
+	static	C* creat()
+	{
+		C* ret = new C();
+		return ret;
+	}
+
+
+};
+
+class D :public A,public Test
+{
+	B v;
+public:
+	D():A(),Test(),v()
+	{
+		cout << "D()" << endl;
+
+	}
+
+
+};
+
 int main()
 {
 
@@ -110,8 +154,33 @@ int main()
 	v->clea();*/
 
 
-	StaticLinkList<int, 3> list;
-	
+	/*StaticLinkList<int, 3> list;
 
+	for (int i = 0; i < 3; i++)
+	{
+		list.insert(0, i);
+	}
+	list.remove(	list.find(list.current()));
+	cout<< list.current() <<endl;
+	*/
+
+	//D c;
+
+	/*A* lpv = new A();
+	const	SmartPointers<A> v = new A();*/
+
+	SharedPointer<A> sp = new A();
+	const SharedPointer<A> csp = sp;
+	SharedPointer<A> NUsp;
+	NUsp = sp;
+	sp->Seta(100);
+
+	std::cout << sp.getRel() << endl;
+
+	std::cout << sp->geta() << endl;
+	std::cout << csp->geta() << endl;
+	std::cout << NUsp->geta() << endl;
+	std::cout << "±È½Ï"<<(NUsp == csp) << endl;
+	std::cout << (NUsp != csp) << endl;
 	return 0;
 }

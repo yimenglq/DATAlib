@@ -55,6 +55,7 @@ namespace DATAlib
 	public:
 		LinkList()
 		{
+			m_current =	reinterpret_cast<Node*>( &m_header);
 			m_header.next = NULL;
 			m_length = 0;
 			m_step = 1;
@@ -109,8 +110,14 @@ namespace DATAlib
 				  
 				  Node* tDel = current->next;
 				  current->next = tDel->next;
-				destory( tDel);
-				  m_length--;
+				  if (m_current == tDel)
+				  {
+					  m_current = tDel->next;
+				  }
+
+				m_length--;
+				  destory( tDel);
+				  
 			  }
 
 
@@ -186,9 +193,10 @@ namespace DATAlib
 				{
 					Node* tDel = m_header.next;
 					m_header.next = tDel->next;
+					m_length--;
 					destory( tDel);
 				}
-				m_length = 0;
+				//m_length = 0;
 			}
 			~LinkList()
 			{
@@ -230,6 +238,8 @@ namespace DATAlib
 			{
 				if (!end())
 				{
+					if (m_current ==reinterpret_cast<Node*>	( & m_header))
+						m_current = m_header.next;
 					return m_current->value;
 				}
 				else
