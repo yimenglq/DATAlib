@@ -1,3 +1,4 @@
+#erro "废弃"
 #include "SmartPointers.h"
 
 namespace DATAlib
