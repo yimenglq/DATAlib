@@ -91,13 +91,15 @@ namespace DATAlib
 
 		void Clear()
 		{
-
-			(*(this->m_rel))--;
-			if (*(this->m_rel) <= 0)
+			if (this->m_rel)
 			{
-				delete this->m_Pointer;
-				delete this->m_rel;
-				
+				(*(this->m_rel))--;
+				if (*(this->m_rel) <= 0)
+				{
+					delete this->m_Pointer;
+					delete this->m_rel;
+
+				}
 			}
 			this->m_Pointer = NULL;
 			this->m_rel = NULL;

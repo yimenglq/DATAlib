@@ -43,6 +43,7 @@ class A/*:public Object*/
 {
 	int a;
 public:
+	A(int c) :a(c) {}
 
 	A()
 	{
@@ -84,7 +85,15 @@ public:
 		
 	}
 
+	bool operator==(const A& a)
+	{
+		return this == &a;
+	}
 
+	bool operator!=(const A& a)
+	{
+		return !(*this==a);
+	}
 };
 
 
@@ -169,7 +178,7 @@ int main()
 	/*A* lpv = new A();
 	const	SmartPointers<A> v = new A();*/
 
-	SharedPointer<A> sp = new A();
+	/*SharedPointer<A> sp = new A();
 	const SharedPointer<A> csp = sp;
 	SharedPointer<A> NUsp;
 	NUsp = sp;
@@ -181,6 +190,43 @@ int main()
 	std::cout << csp->geta() << endl;
 	std::cout << NUsp->geta() << endl;
 	std::cout << "比较"<<(NUsp == csp) << endl;
-	std::cout << (NUsp != csp) << endl;
+	std::cout << (NUsp != csp) << endl;*/
+
+	A c1(1);
+	A c2(2);
+	A c3(3);
+	LinkList<A> c;
+
+	c.insert(c1);
+	c.insert(c2);
+	c.insert(c3);
+	for (c.move(0); !c.end(); c.next())
+	{
+		cout << "开始" << endl;
+		cout << c.current().geta() << endl;
+	}
+
+	cout << "零号元素更改之前" << c.get(0).geta() << endl;
+	c.set(0, c2);
+	cout << "零号元素更改后" << c.get(0).geta() << endl;
+
+
+	for (c.move(0); !c.end(); c.next())
+	{
+		cout << "删除零号元素之前 " << endl;
+		cout << c.current().geta() << endl;
+
+	}
+	c.remove(0);
+
+	for (c.move(0); !c.end(); c.next())
+	{
+		cout << "删除零号元素" << endl;
+		cout << c.current().geta() << endl;
+
+	}
+	 
+
+
 	return 0;
 }
