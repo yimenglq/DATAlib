@@ -133,6 +133,7 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="LinkList.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="LoopLinkList.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pointer.h" />
     <ClInclude Include="SeqList.h" />

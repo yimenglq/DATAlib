@@ -16,6 +16,7 @@
 #include"Exception.h"
 #include"StaticLinkList.h"
 #include"SharedPointer.h"
+#include"LoopLinkList.h"
 
 
 using namespace DATAlib;
@@ -155,6 +156,29 @@ public:
 
 };
 
+class text
+{
+public:
+	text(int a = NULL):val(a) { cout << "text() \t";}
+
+	~text() { cout << "~text()"; }
+
+
+	bool operator==(const text& a)
+	{
+		return this == &a;
+	}
+
+	bool operator!=(const text& a)
+	{
+		return !(*this == a);
+	}
+
+
+public:
+	int val;
+};
+
 int main()
 {
 
@@ -191,40 +215,45 @@ int main()
 	std::cout << NUsp->geta() << endl;
 	std::cout << "比较"<<(NUsp == csp) << endl;
 	std::cout << (NUsp != csp) << endl;*/
-
-	A c1(1);
-	A c2(2);
-	A c3(3);
-	LinkList<A> c;
-
+	
+	text c1 (1);
+	/*text&& c2 = static_cast<text&&>(c1);*/ 
+	text&& c3 = text(3);
+	/*text& c4 = c3;
+	c3 = c4;*/
+	/*A c2(2);
+	A c3(3);*/
+	//LinkList<A> c;
+	LoopLinkList<text> c;
 	c.insert(c1);
-	c.insert(c2);
 	c.insert(c3);
-	for (c.move(0); !c.end(); c.next())
+	//c.insert(c3);
+	/*for (c.move(0); !c.end(); c.next())
 	{
 		cout << "开始" << endl;
 		cout << c.current().geta() << endl;
-	}
+	}*/
 
-	cout << "零号元素更改之前" << c.get(0).geta() << endl;
-	c.set(0, c2);
-	cout << "零号元素更改后" << c.get(0).geta() << endl;
+	//cout << "零号元素更改之前" << c.get(0).geta() << endl;
+	//c.set(0, c2);
+	//cout << "零号元素更改后" << c.get(0).geta() << endl;
 
 
-	for (c.move(0); !c.end(); c.next())
+	/*for (c.move(0); !c.end(); c.next())
 	{
 		cout << "删除零号元素之前 " << endl;
 		cout << c.current().geta() << endl;
 
-	}
+	}*/
 	c.remove(0);
 
-	for (c.move(0); !c.end(); c.next())
+
+	/*for (c.move(0); !c.end(); c.next())
 	{
 		cout << "删除零号元素" << endl;
 		cout << c.current().geta() << endl;
 
-	}
+	}*/
 	 
 
 
